@@ -23,12 +23,13 @@ const router = express.Router()
     // etc
   ]
  */
-router.get('/', (req, res, next) => {
-  Schemes.find()
-    .then(schemes => {
-      res.json(schemes)
-    })
-    .catch(next)
+router.get('/', async (req, res, next) => {
+  try{
+    const found = await Schemes.find()
+      res.json(found)
+  } catch(err){
+      next(err)
+    }
 })
 
 /*
